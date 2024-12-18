@@ -1,3 +1,5 @@
+all: firmware.elf
+
 hello.txt:
 	echo "hello world!" > hello.txt
 
@@ -10,10 +12,18 @@ main.i: main.c
 clean:
 	rm -f main.i hello.txt
 
-.PHONY: clean
-
 CC=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-gcc
 AS=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-as
 
 %.o: %.s
-    $(AS) $< -o $@
+	$(AS) $< -o $@
+
+LD=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-ld
+SRC=main.c second.c
+OBJS=$(patsubst %.c,%.o,$(SRC))
+
+firmware.elf: $(OBJS)
+	$(LD) -o $@ $^
+
+.PHONY: clean
+.PHONE: all
