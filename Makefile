@@ -11,3 +11,9 @@ clean:
 	rm -f main.i hello.txt
 
 .PHONY: clean
+
+CC=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-gcc
+AS=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-as
+
+%.o: %.s
+    $(AS) $< -o $@

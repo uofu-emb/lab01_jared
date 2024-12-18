@@ -11,3 +11,6 @@ In this lab we go through the basics of makefiles.
 
 ## Cleaning up
 1. What do you predict will happen if you run it again? Nothing because there are no files to remove.
+
+## Implicit Rules
+1. What is your main strategy for compiling a second file? I would just make a second rule to compile it.
